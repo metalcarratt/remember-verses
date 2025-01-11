@@ -82,6 +82,7 @@ p .inline-word {
   border-radius: 10px;
   padding: 5px 10px;
   line-height: 1;
+  color: #213547;
 }
 
 p .inline-word:hover {
@@ -116,10 +117,12 @@ button {
   border: 2px solid #89e4c2;
   background-color: #e6fffa;
   padding: 10px 40px;
+  color: #213547;
 }
 
 button.answer {
   width: calc(100% - 40px);
+  color: #213547;
 }
 
 button.answer.Correct {
