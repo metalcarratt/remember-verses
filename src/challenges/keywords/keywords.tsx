@@ -4,11 +4,13 @@ import { useKeywords } from "./use-keywords";
 
 type Props = {
     step: KeywordsStep,
+    stepi: number,
+    maxSteps: number,
     next: () => void,
     back: () => void
 }
 
-export const Keywords = ({step, next, back}: Props) => {
+export const Keywords = ({step, next, back, stepi, maxSteps}: Props) => {
     const { clickAnswer, returnAnswer, keywords, slots, verse, parts, answers, result, check } = useKeywords(step);
 
     const keywordPart = (part: Part) => {
@@ -25,7 +27,7 @@ export const Keywords = ({step, next, back}: Props) => {
     }
 
     return (
-      <Page result={result} next={next}>
+      <Page result={result} next={next} step={stepi} maxStep={maxSteps}>
         <h2>
           <a href="#" onClick={back} className="backBtn">◀</a>
           {verse.reference}

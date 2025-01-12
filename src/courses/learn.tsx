@@ -22,10 +22,10 @@ export const LearnCourse = ({verse, otherVerses, back}: Props) => {
       buildMatchRefs(verse, otherVerses),
   ];
   const [step, setStep] = useState(0);
-  
+  const maxStep = steps.length - 1;
   
   const next = () => {
-    const maxStep = steps.length - 1;
+    // const maxStep = steps.length - 1;
     if (step === maxStep) {
       setStep(0);
       back();
@@ -36,9 +36,9 @@ export const LearnCourse = ({verse, otherVerses, back}: Props) => {
   
   return (
     <div className="bg">
-      {steps[step].type === 'reference' && <VerseReference step={steps[step]} next={next} back={back} />}
-      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} />}
-      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} />}
+      {steps[step].type === 'reference' && <VerseReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
+      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
+      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
     </div>
   )
 }

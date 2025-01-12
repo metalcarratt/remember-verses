@@ -180,3 +180,18 @@ button:hover {
   line-height: 1;
   width: auto;
 }
+
+.progress {
+  height: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.progress span {
+  width: 100%;
+  background-color: #213547;
+}
+
+.progress span.done {
+  background-color: #23d2fa;
+}

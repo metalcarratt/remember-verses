@@ -1,13 +1,17 @@
+import { ProgressBar } from "./progress-bar";
 import { Result } from "./use-result";
 
 type Props = {
     result: Result,
-    next: () => void
+    next: () => void,
+    step: number,
+    maxStep: number
 }
 
-export const Page = ({result, next, children}: React.PropsWithChildren<Props>) => {
+export const Page = ({result, next, children, step, maxStep}: React.PropsWithChildren<Props>) => {
     return (
       <div className={`verse ${result}`}>
+        <ProgressBar step={step} maxStep={maxStep} />
         {children}
         {result !== undefined && <div className="actions"><span className={result}>{result}</span><button onClick={next}>Next ▶</button></div>}
       </div>

@@ -21,9 +21,10 @@ export const ReviewCourse = ({verses, back}: Props) => {
     ...verses.map(verse => buildSections(verse)),
   ];
   shuffleArray(steps);
+  const maxStep = steps.length < 19 ? steps.length - 1 : 19;
   
   const next = () => {
-    const maxStep = steps.length < 19 ? steps.length - 1 : 19;
+    // const maxStep = steps.length < 19 ? steps.length - 1 : 19;
     if (step === maxStep) {
       setStep(0);
       back();
@@ -34,8 +35,8 @@ export const ReviewCourse = ({verses, back}: Props) => {
   
   return (
     <div className="bg">
-      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} />}
-      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} />}
+      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
+      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
     </div>
   ) 
 }
