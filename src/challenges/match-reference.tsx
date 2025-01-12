@@ -7,6 +7,7 @@ import { useResult } from "./use-result";
 type Props = {
     step: MatchRefStep,
     next: () => void,
+    back: () => void
 }
 
 type Result = 'Correct' | 'Incorrect' | undefined;
@@ -20,7 +21,7 @@ const getAnswerClassName = (answer: string, verse: Verse, result: Result, chosen
     return '';
 }
 
-export const MatchReference = ({step, next}: Props) => {
+export const MatchReference = ({step, next, back}: Props) => {
     const {verse, answers} = step;
     const {result, setResult} = useResult(step);
     const [chosen, setChosen] = useState<string | undefined>(undefined);
@@ -39,6 +40,9 @@ export const MatchReference = ({step, next}: Props) => {
 
     return (
       <Page result={result} next={next}>
+        <h2>
+          <a href="#" onClick={back} className="backBtn">◀</a>
+        </h2>
         <p>{verse.verse}</p>
         {answers.map(answer => {
             const className = getAnswerClassName(answer, verse, result, chosen);

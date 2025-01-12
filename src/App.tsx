@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import './App.css'
-import { VerseReference } from './challenges/reference';
-import { MatchReference } from './challenges/match-reference';
-import { buildMatchRefs, MatchRefStep } from './challenges/match-reference-builder';
-import { buildReferences, ReferenceStep } from './challenges/reference-builder';
-import { buildKeywords, KeywordsStep } from './challenges/keywords/keywords-builder';
-import { Keywords } from './challenges/keywords/keywords';
-import { buildSections } from './challenges/keywords/sections-builder';
+import { Verse } from './types';
+import { LearnCourse } from './courses/learn';
+import { ReviewCourse } from './courses/review';
 
 const verses = [
   {
@@ -41,41 +37,45 @@ const verses = [
   }
 ]
 
-type Step = ReferenceStep | MatchRefStep | KeywordsStep;
-
-const calculateSteps = (): Step[] => {
-  return [
-    ...verses.map(verse => buildReferences(verse)),
-    ...verses.map(verse => buildMatchRefs(verse, verses)),
-    ...verses.map(verse => buildKeywords(verse)),
-    ...verses.map(verse => buildSections(verse)),
-  ];
-}
+type Page = 'learn' | 'review' | 'overview';
 
 function App() {
+  const [page, setPage] = useState<Page>('overview');
+  const [selectedVerse, setSelectedVerse] = useState<Verse | undefined>(undefined);
 
-  const [step, setStep] = useState(0);
-
-  const steps = calculateSteps();
-
-  const next = () => {
-    const maxStep = steps.length - 1;
-    if (step === maxStep) {
-      setStep(0);
-      return;
-      // or, exit
-    }
-    
-    setStep(step + 1);
+  const back = () => {
+    setPage('overview');
+    setSelectedVerse(undefined);
   }
 
-  return (
-    <div className="bg">
-      {steps[step].type === 'reference' && <VerseReference step={steps[step]} next={next} />}
-      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} />}
-      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} />}
-    </div>
-  )
+  if (page === 'overview') {
+    return  (
+      <div className="bg">
+        <div className="verse">
+          <h2><span />Learn</h2>
+          { verses.map(verse => <div className="menuItem" onClick={() => {setPage('learn'); setSelectedVerse(verse);}}>{verse.reference} ▶</div>) }
+          <h2><span />Review</h2>
+          <div className="menuItem" onClick={() => {setPage('review')}}>Review x20 ▶</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (page === 'learn' && selectedVerse) {
+    return  (
+      <div className="bg">
+        <LearnCourse verse={selectedVerse} otherVerses={verses} back={back} />
+      </div>
+    );
+  }
+
+  if (page === 'review') {
+    return (
+      <div className="bg">
+        <ReviewCourse verses={verses} back={back} />
+      </div>
+    )
+  }
 }
 
-export default App
+export default App;
