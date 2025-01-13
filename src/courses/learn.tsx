@@ -15,19 +15,30 @@ type Props = {
 }
 
 export const LearnCourse = ({verse, otherVerses, back}: Props) => {
-  const steps = [
+  const [steps, setSteps] = useState([
       buildReferences(verse),
       buildKeywords(verse),
       buildSections(verse),
       buildMatchRefs(verse, otherVerses),
-  ];
+  ]);
   const [step, setStep] = useState(0);
-  const maxStep = steps.length - 1;
+
+  const [wrong, setWrong] = useState(0);
+//   const markWrong = () => {
+//     setWrong(wrong + 1);
+//   }
   
-  const next = () => {
+  const next = (isWrong = false) => {
     // const maxStep = steps.length - 1;
-    if (step === maxStep) {
+    if (isWrong) {
+        setSteps([...steps, steps[step]]);
+        setWrong(wrong + 1);
+    }
+
+    if (step === steps.length - 1) {
       setStep(0);
+      const score = Math.abs((1 - (wrong / steps.length)) * 100);
+      localStorage.setItem(`score:${verse.reference}`, `${score}`);
       back();
     }
     
@@ -36,9 +47,9 @@ export const LearnCourse = ({verse, otherVerses, back}: Props) => {
   
   return (
     <div className="bg">
-      {steps[step].type === 'reference' && <VerseReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
-      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
-      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} stepi={step} maxSteps={maxStep + 1} />}
+      {steps[step].type === 'reference' && <VerseReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
+      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
+      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
     </div>
   )
 }

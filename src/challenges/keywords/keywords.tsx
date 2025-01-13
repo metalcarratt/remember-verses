@@ -6,7 +6,7 @@ type Props = {
     step: KeywordsStep,
     stepi: number,
     maxSteps: number,
-    next: () => void,
+    next: (wrong: boolean) => void,
     back: () => void
 }
 

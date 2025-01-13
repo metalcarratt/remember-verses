@@ -3,7 +3,7 @@ import { Result } from "./use-result";
 
 type Props = {
     result: Result,
-    next: () => void,
+    next: (wrong: boolean) => void,
     step: number,
     maxStep: number
 }
@@ -13,7 +13,7 @@ export const Page = ({result, next, children, step, maxStep}: React.PropsWithChi
       <div className={`verse ${result}`}>
         <ProgressBar step={step} maxStep={maxStep} />
         {children}
-        {result !== undefined && <div className="actions"><span className={result}>{result}</span><button onClick={next}>Next ▶</button></div>}
+        {result !== undefined && <div className="actions"><span className={result}>{result}</span><button onClick={() => next(result === "Incorrect")}>Next ▶</button></div>}
       </div>
     );
 }

@@ -53,7 +53,15 @@ function App() {
       <div className="bg">
         <div className="verse">
           <h2><span />Learn</h2>
-          { verses.map(verse => <div className="menuItem" onClick={() => {setPage('learn'); setSelectedVerse(verse);}}>{verse.reference} ▶</div>) }
+          { verses.map(verse => {
+            const score = localStorage.getItem(`score:${verse.reference}`) || '';
+            return (
+              <div className="menuItem" onClick={() => {setPage('learn'); setSelectedVerse(verse);}}>
+                <span>{verse.reference} ▶</span>
+                <span>{score ? score + '%' : ''}</span>
+              </div>
+            )
+          })}
           <h2><span />Review</h2>
           <div className="menuItem" onClick={() => {setPage('review')}}>Review x20 ▶</div>
         </div>

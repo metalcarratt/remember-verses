@@ -5,7 +5,7 @@ type Props = {
     step: ReferenceStep,
     stepi: number,
     maxSteps: number,
-    next: () => void,
+    next: (wrong: boolean) => void,
     back: () => void
 }
 
@@ -24,7 +24,7 @@ export const VerseReference = ({step, stepi, maxSteps, next, back}: Props) => {
         <span className="h2-foot-2"></span>
       </span>
       <p>{verse.verse}</p>
-      <button onClick={next}>Next ▶</button>
+      <button onClick={() => next(false)}>Next ▶</button>
     </div>
     );
 }
