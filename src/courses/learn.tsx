@@ -7,6 +7,8 @@ import { Verse } from "../types"
 import { VerseReference } from "../challenges/reference"
 import { MatchReference } from "../challenges/match-reference"
 import { Keywords } from "../challenges/keywords/keywords"
+import { buildMatchContent } from "../challenges/match-content-builder"
+import { MatchContent } from "../challenges/match-content"
 
 type Props = {
     verse: Verse,
@@ -21,17 +23,14 @@ export const LearnCourse = ({verse, otherVerses, back}: Props) => {
       buildKeywords(verse.keywords2, verse),
       buildKeywords(verse.keywords3, verse),
       buildSections(verse),
+      buildMatchContent(verse, otherVerses),
       buildMatchRefs(verse, otherVerses),
   ]);
   const [step, setStep] = useState(0);
 
   const [wrong, setWrong] = useState(0);
-//   const markWrong = () => {
-//     setWrong(wrong + 1);
-//   }
   
   const next = (isWrong = false) => {
-    // const maxStep = steps.length - 1;
     if (isWrong) {
         setSteps([...steps, steps[step]]);
         setWrong(wrong + 1);
@@ -49,9 +48,10 @@ export const LearnCourse = ({verse, otherVerses, back}: Props) => {
   
   return (
     <div className="bg">
-      {steps[step].type === 'reference' && <VerseReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
-      {steps[step].type === 'matchref'  && <MatchReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
-      {steps[step].type === 'keywords'  && <Keywords step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
+      {steps[step].type === 'reference'    && <VerseReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
+      {steps[step].type === 'matchref'     && <MatchReference step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
+      {steps[step].type === 'matchcontent' && <MatchContent   step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
+      {steps[step].type === 'keywords'     && <Keywords       step={steps[step]} next={next} back={back} stepi={step} maxSteps={steps.length} />}
     </div>
   )
 }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Verse } from "../types";
-import { MatchRefStep } from "./match-reference-builder";
-import { Page } from "./page";
 import { Result, useResult } from "./use-result";
+import { Page } from "./page";
+import { MatchContentStep } from "./match-content-builder";
+import { Verse } from "../types";
 
 type Props = {
-    step: MatchRefStep,
+    step: MatchContentStep,
     stepi: number,
     maxSteps: number,
     next: (wrong: boolean) => void,
@@ -13,7 +13,7 @@ type Props = {
 }
 
 const getAnswerClassName = (answer: string, verse: Verse, result: Result, chosen?: string) => {
-    if (answer === verse.reference && result !== undefined) {
+    if (answer === verse.verse && result !== undefined) {
         return 'Correct';
     } else if (result === 'Incorrect' && chosen === answer) {
         return 'Incorrect';
@@ -21,19 +21,19 @@ const getAnswerClassName = (answer: string, verse: Verse, result: Result, chosen
     return '';
 }
 
-export const MatchReference = ({step, stepi, maxSteps, next, back}: Props) => {
+export const MatchContent = ({step, stepi, maxSteps, next, back}: Props) => {
     const {verse, answers} = step;
     const {result, setResult} = useResult(step);
     const [chosen, setChosen] = useState<string | undefined>(undefined);
     const checkAnswer = (answer: string) => {
         setChosen(answer);
-        if (answer === verse.reference) {
+        if (answer === verse.verse) {
             setResult('Correct');
         } else {
             setResult('Incorrect');
         }
     }
-
+    
     useEffect(() => {
         setChosen(undefined);
     }, [step]);
@@ -43,11 +43,13 @@ export const MatchReference = ({step, stepi, maxSteps, next, back}: Props) => {
         <h2>
           <a href="#" onClick={back} className="backBtn">◀</a>
         </h2>
-        <p>{verse.verse}</p>
+        <p className="short">{verse.reference}</p>
+        <div className="panels">
         {answers.map(answer => {
             const className = getAnswerClassName(answer, verse, result, chosen);
-            return (<button className={`answer ${className}`} onClick={() => checkAnswer(answer)}>{answer}</button>)
+            return (<button className={`answer panel ${className}`} onClick={() => checkAnswer(answer)}>{answer}</button>)
         })}
+        </div>
       </Page>
     );
 }

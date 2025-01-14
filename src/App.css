@@ -97,6 +97,11 @@ p {
   min-height: 200px;
 }
 
+p.short {
+  min-height: auto;
+  padding-bottom: 0;
+}
+
 p .inline-blank {
   display: inline-block;
   width: 75px;
@@ -157,6 +162,14 @@ button.answer {
   color: #213547;
 }
 
+button.answer.panel {
+  margin: 2px;
+  padding: 2px 4px;
+  justify-self: stretch;
+  align-self: stretch;
+  width: auto;
+}
+
 button.answer.Correct {
   border: 2px solid #23d2fa;
 }
@@ -168,6 +181,11 @@ button.answer.Incorrect {
 button:hover {
   background-color: #c1d6d2;
   border: 2px solid #89e4c2;
+}
+
+.panels {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
 }
 
 .keywords {
