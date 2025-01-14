@@ -2,7 +2,8 @@ import { useState } from 'react';
 import './App.css'
 import { Verse } from './types';
 import { LearnCourse } from './courses/learn';
-import { ReviewCourse } from './courses/review';
+import { ReviewCourse } from './courses/review-verses';
+import { ReviewRefCourse } from './courses/review-refs';
 
 const verses = [
   {
@@ -47,7 +48,7 @@ const verses = [
   }
 ]
 
-type Page = 'learn' | 'review' | 'overview';
+type Page = 'learn' | 'review' | 'reviewref' | 'overview';
 
 function App() {
   const [page, setPage] = useState<Page>('overview');
@@ -73,7 +74,8 @@ function App() {
             )
           })}
           <h2><span />Review</h2>
-          <div className="menuItem" onClick={() => {setPage('review')}}>Review x20 ▶</div>
+          <div className="menuItem" onClick={() => {setPage('review')}}>Review verses ▶</div>
+          <div className="menuItem" onClick={() => {setPage('reviewref')}}>Review verse references ▶</div>
         </div>
       </div>
     );
@@ -91,6 +93,14 @@ function App() {
     return (
       <div className="bg">
         <ReviewCourse verses={verses} back={back} />
+      </div>
+    )
+  }
+
+  if (page === 'reviewref') {
+    return (
+      <div className="bg">
+        <ReviewRefCourse verses={verses} back={back} />
       </div>
     )
   }
