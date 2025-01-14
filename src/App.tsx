@@ -9,30 +9,40 @@ const verses = [
     reference: 'John 3:16',
     verse: 'For God so loved the world that He gave His only begotten Son, that everyone who believes into Him would not perish, but would have eternal life.',
     keywords: 'For God so loved the [world] that He gave His only begotten [Son], that everyone who [believes] into Him would not perish, but would have [eternal] life.',
+    keywords2: 'For God so [loved] the world that He gave His [only] begotten Son, that everyone who believes into Him would not [perish], but would have eternal [life].',
+    keywords3: 'For [God] so loved the world that He gave His only [begotten] Son, that [everyone] who believes into Him would not perish, but [would] have eternal life.',
     sections: '[For God] [so loved] [the world] [that He gave] [His only begotten Son], [that everyone] [who believes] [into Him] [would not perish], [but would have] [eternal life].'
   },
   {
     reference: 'Romans 5:8',
     verse: 'But God commends His own love to us in that while we were yet sinners, Christ died for us.',
     keywords: 'But God commends His own [love] to us in that while we were yet [sinners], Christ [died] for [us].',
+    keywords2: '[But] God commends His [own] love to us in that [while] we were yet sinners, [Christ] died for us.',
+    keywords3: 'But God [commends] His own love to [us] in that while we were [yet] sinners, Christ died [for] us.',
     sections: '[But God] [commends] [His own love] [to us] [in that while] [we were] [yet sinners], [Christ died] [for us].'
   },
   {
     reference: 'Ephesians 2:4',
     verse: 'But God, being rich in mercy, because of His great love with which He loved us,',
     keywords: 'But [God], being rich in [mercy], because of His great [love] with which He [loved] us,',
+    keywords2: 'But [God], being [rich] in mercy, because of His [great] love with which He loved [us],',
+    keywords3: '[But] God, [being] rich in mercy, [because] of His great love [with] which He loved us,',
     sections: '[But God], [being rich] [in mercy], [because of] [His great love] [with which] [He loved us],'
   },
   {
     reference: 'Titus 3:4',
     verse: 'But when the kindness and the love to man of our Savior God appeared,',
-    keywords: 'But when the [kindness] and the [love]to man of our [Savior] God [appeared],',
+    keywords: 'But when the [kindness] and the [love] to man of our [Savior] God [appeared],',
+    keywords2: 'But [when] the kindness [and] the love to [man] of our Savior [God] appeared,',
+    keywords3: '[But] when [the] kindness and the love [to] man of [our] Savior God appeared,',
     sections: '[But when] [the kindness] [and] [the love] [to man] [of our] [Savior God] [appeared],'
   },
   {
     reference: '1 John 4:10',
     verse: 'Herein is love, not that we have loved God but that He loved us and sent His Son as a propitiation for our sins.',
     keywords: 'Herein is [love], not that we have loved [God] but that He loved [us] and sent His Son as a propitiation for our [sins].',
+    keywords2: '[Herein] is love, not that we have [loved] God but that He loved us and sent His [Son] as a propitiation for [our] sins.',
+    keywords3: 'Herein is love, [not] that we have loved God [but] that He [loved] us and sent His Son as a [propitiation] for our sins.',
     sections: '[Herein] [is love], [not that] [we have] [loved God] [but that] [He loved us] [and sent] [His Son] [as a propitiation] [for our sins].',
   }
 ]

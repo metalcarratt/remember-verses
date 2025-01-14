@@ -12,8 +12,11 @@ export type KeywordsStep = {
   type: "keywords";
 };
 
-export const buildKeywords = (verse: Verse): KeywordsStep => {
-  const words = verse.keywords.split(" ");
+export const buildKeywords = (
+  verseKeywords: string,
+  verse: Verse
+): KeywordsStep => {
+  const words = verseKeywords.split(" ");
   const parts: Part[] = [];
   const keywords: string[] = [];
   let currentPart = "";

@@ -17,7 +17,9 @@ type Props = {
 export const LearnCourse = ({verse, otherVerses, back}: Props) => {
   const [steps, setSteps] = useState([
       buildReferences(verse),
-      buildKeywords(verse),
+      buildKeywords(verse.keywords, verse),
+      buildKeywords(verse.keywords2, verse),
+      buildKeywords(verse.keywords3, verse),
       buildSections(verse),
       buildMatchRefs(verse, otherVerses),
   ]);

@@ -17,7 +17,9 @@ export const ReviewCourse = ({verses, back}: Props) => {
    
   const steps = [
     ...verses.map(verse => buildMatchRefs(verse, verses)),
-    ...verses.map(verse => buildKeywords(verse)),
+    ...verses.map(verse => buildKeywords(verse.keywords, verse)),
+    ...verses.map(verse => buildKeywords(verse.keywords2, verse)),
+    ...verses.map(verse => buildKeywords(verse.keywords3, verse)),
     ...verses.map(verse => buildSections(verse)),
   ];
   shuffleArray(steps);
